@@ -1,0 +1,223 @@
+<%@ Master Language="C#" AutoEventWireup="true" Codebehind="Site.master.cs" Inherits="Rifacimento.Books.UI.Site" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>EAG Data Entry Screens</title>
+    <style type="text/css">
+        .mouseOut{ background: #ccccff; color: #0000000; }
+        .mouseOver{ background: #FFFAFA; color: #0000000; }
+    </style>
+</head>
+<body onclick="HideDiv('autocomplete','theframe');">
+    <form id="form1" runat="server">
+        <div>
+            <asp:Panel ID="PanelHeader" runat="server" Width="100%">
+                <table width="100%">
+                    <tr>
+                        <td style="width: 100%">
+                            <table class="FormTable">
+                                <tr>
+                                    <td colspan="2" style="width: 8%; height: 42px;">
+                                        <asp:Image ID="HeaderLogoImage" runat="server" ImageUrl="~/Images/Rifacimento_logo.jpg" />
+                                    </td>
+                                    <td valign="bottom" style="width: 30%; height: 42px;" align="right">
+                                        <table width="100%">
+                                            <tr>
+                                                <td style="width: 430px">
+                                                    <asp:LinkButton ID="WelcomeLinkButton" runat="server" ToolTip="User Preferences"
+                                                        ForeColor="#185394" CssClass="medium"></asp:LinkButton>
+                                                </td>
+                                                <td colspan="3">
+                                                    <a id="HomeTag" style="text-decoration: none" runat="server">
+                                                        <asp:ImageButton ID="HomeLinkButton" ToolTip="Home" runat="server" PostBackUrl=""
+                                                            ImageUrl="~/Images/Home.GIF"></asp:ImageButton>
+                                                        <asp:LinkButton ID="HomeTextLinkButton" runat="server" Text="Home" CssClass="HyperLinkMenu"></asp:LinkButton>
+                                                    </a>||&nbsp; &nbsp; <a id="HelpTag" style="text-decoration: none; cursor: hand" runat="server"
+                                                        onclick="window.open('../Help/OnlineHelpMainPage.htm');">
+                                                        <asp:ImageButton ID="HelpLinkButton" runat="server" ToolTip="Help" ImageUrl="~/Images/help.GIF"
+                                                            CssClass="HyperLink" OnClientClick="window.open('../Help/OnlineHelpMainPage.htm');">
+                                                        </asp:ImageButton>
+                                                        <asp:LinkButton ID="HelpTextLinkButton" runat="server" Text="Help" CssClass="HyperLinkMenu"
+                                                            OnClientClick="window.open('../Help/OnlineHelpMainPage.htm');"></asp:LinkButton>
+                                                    </a>||&nbsp; <a id="LogoutTag" runat="server" style="text-decoration: none">
+                                                        <asp:ImageButton ID="LogoutLinkButton" ToolTip="Logout" ImageUrl="~/Images/logout.GIF"
+                                                            runat="server" Visible="False"></asp:ImageButton>
+                                                        <asp:LinkButton ID="LogOutTextLinkButton" runat="server" Text="Logout" CssClass="HyperLinkMenu"
+                                                            Visible="False"></asp:LinkButton>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <asp:HiddenField ID="selectedPage" runat="server" Value="" />
+                        </td>
+                    </tr>
+                </table>
+                <table style="width: 100%">
+                    <tr>
+                        <td style="background-color: transparent; width: 100%;">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="width: 80%; height: 20px; background-color: #185394;" colspan="2" rowspan=""
+                                        align="center">
+                                        <asp:Menu ID="masterMenu" CssClass="Menu" runat="server" Width="61%" DynamicHorizontalOffset="2"
+                                            Orientation="Horizontal" EnableTheming="True" StaticSubMenuIndent="2" OnMenuItemClick="masterMenu_OnMenuItemClick"
+                                            StaticEnableDefaultPopOutImage="false" BackColor="#185394" Height="20px">
+                                            <Items>
+                                                <asp:MenuItem Text="Home" Value="Home" SeparatorImageUrl="~/Images/nav_split.gif">
+                                                </asp:MenuItem>
+                                                <asp:MenuItem Text="Contact Us" Value="Contactus" SeparatorImageUrl="~/Images/nav_split.gif">
+                                                </asp:MenuItem>
+                                                <asp:MenuItem Text="About us" Value="About us" SeparatorImageUrl="~/Images/nav_split.gif">
+                                                </asp:MenuItem>
+                                                <asp:MenuItem Text="Books Published" Value="BooksPublished" SeparatorImageUrl="~/Images/nav_split.gif">
+                                                </asp:MenuItem>
+                                                <%--                                                <asp:MenuItem Text="Mapping Screens" Value="Mapping Screens" SeparatorImageUrl="~/Images/nav_split.gif">
+                                                    <asp:MenuItem Text="Project Related" Value="Lifecycle">
+                                                        <asp:MenuItem Text="Lifecycle" Value="Lifecycle"></asp:MenuItem>
+                                                        <asp:MenuItem Text="Experience Segment" Value="Experience Segment"></asp:MenuItem>
+                                                        <asp:MenuItem Text="Segment Type" Value="Segment Type"></asp:MenuItem>
+                                                        <asp:MenuItem Text="Touchpoint Type" Value="Touchpoint Type"></asp:MenuItem>
+                                                        <asp:MenuItem Text="Strategic Intent" Value="Strategic Intent"></asp:MenuItem>
+                                                    </asp:MenuItem>
+--%>
+                                            </Items>
+                                            <DynamicItemTemplate>
+                                                <%# Eval("Text") %>
+                                            </DynamicItemTemplate>
+                                            <StaticMenuItemStyle HorizontalPadding="0px" VerticalPadding="0px" ForeColor="White"
+                                                ItemSpacing="0px" CssClass="StaticMenuItemStyleCSS" />
+                                            <StaticSelectedStyle BackColor="#086BB5" VerticalPadding="0px" HorizontalPadding="0px"
+                                                ItemSpacing="0px" Height="19px" />
+                                            <DynamicMenuStyle ForeColor="White" HorizontalPadding="0px" VerticalPadding="0px" />
+                                            <DynamicMenuItemStyle HorizontalPadding="0px" VerticalPadding="0px" CssClass="MenuStaticMenuItemStyle"
+                                                ForeColor="White" Height="19px" BackColor="#185394" />
+                                            <StaticMenuStyle HorizontalPadding="0px" VerticalPadding="0px" />
+                                            <DynamicHoverStyle BackColor="#086BB5" Height="19px" ForeColor="White" />
+                                            <StaticHoverStyle BackColor="#086BB5" Height="19px" />
+                                        </asp:Menu>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </div>
+        <div>
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 100px">
+                        <div>
+                            <asp:Panel ID="LeftPanel" runat="server" Width="100%">
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td style="background-color: transparent; width: 100%;">
+                                            <table style="width: 100%">
+                                                <tr>
+                                                    <td style="width: 80%; height: 20px; background-color: #185394;" colspan="2" rowspan=""
+                                                        align="left">
+                                                        <asp:TreeView ID="DataTreeview" runat="server" Width="61%" BackColor="#185394" Height="20px"
+                                                            ForeColor="White" OnSelectedNodeChanged="MasterTree_OnSelectedNodeChanged">
+                                                            <Nodes>
+                                                                <asp:TreeNode Text="Manage Classifications" Value="ManageClassifications">
+                                                                    <asp:TreeNode Text="Classification" Value="Classification"></asp:TreeNode>
+                                                                    <asp:TreeNode Text="Sub-Classification" Value="SubClassification"></asp:TreeNode>
+                                                                    <asp:TreeNode Text="Associate Classification" Value="AssociateClassification"></asp:TreeNode>
+                                                                </asp:TreeNode>
+                                                                <asp:TreeNode Text="Manage Data" Value="Administration">
+                                                                    <asp:TreeNode Text="Upload Data" Value="Upload"></asp:TreeNode>
+                                                                    <asp:TreeNode Text="View and Download Data" Value="ViewData"></asp:TreeNode>
+                                                                    <asp:TreeNode Text="Send Email" Value="Track Data"></asp:TreeNode>
+                                                                    <asp:TreeNode Text="Track Data Status" Value="Track Data"></asp:TreeNode>
+                                                                    <asp:TreeNode Text="Archive Data" Value="Experience Segment"></asp:TreeNode>
+                                                                </asp:TreeNode>
+                                                                <asp:TreeNode Text="Master Data" Value="MasterData">
+                                                                    <asp:TreeNode Text="Book Details" Value="BookDetails"></asp:TreeNode>
+                                                                    <asp:TreeNode Text="Country/Area/Zone" Value="Area"></asp:TreeNode>
+                                                                </asp:TreeNode>
+                                                                <asp:TreeNode Text="Email Pattern" Value="EmailPattern">
+                                                                    <asp:TreeNode Text="AWTCircluar" Value="AWTCircluar"></asp:TreeNode>
+                                                                    <asp:TreeNode Text="AAWCircluar" Value="AAWCircluar"></asp:TreeNode>
+                                                                </asp:TreeNode>
+                                                                <%--                                                                <asp:TreeNode Text="Mapping Screens" Value="Mapping Screens">
+                                                                    <asp:TreeNode Text="Project Related" Value="Project Related">
+                                                                        <asp:TreeNode Text="Lifecycle" Value="Lifecycle"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Experience Segment" Value="Experience Segment"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Segment Type" Value="Segment Type"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Touchpoint Type" Value="Touchpoint Type"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Strategic Intent" Value="Strategic Intent"></asp:TreeNode>
+                                                                    </asp:TreeNode>
+                                                                    <asp:TreeNode Text="Touchpoint Related" Value="Touchpoint Related">
+                                                                        <asp:TreeNode Text="Lifecycle" Value="Lifecycle"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Experience Segment" Value="Experience Segment"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Segment Type" Value="Segment Type"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Touchpoint Type" Value="Touchpoint Type"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Strategic Intent" Value="Strategic Intent"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Language" Value="Language"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Market" Value="Market"></asp:TreeNode>
+                                                                        <asp:TreeNode Text="Product" Value="Product"></asp:TreeNode>
+                                                                    </asp:TreeNode>
+                                                                </asp:TreeNode>
+--%>
+                                                            </Nodes>
+                                                            <HoverNodeStyle BackColor="#086BB5" Height="19px" />
+                                                            <SelectedNodeStyle BackColor="#086BB5" Height="19px" />
+                                                        </asp:TreeView>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                        </div>
+                    </td>
+                    <td>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        <table style="width: 100%">
+                            <tr style="height: 40px; width: 100%">
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%; border-top: #808080 1px solid; border-left: #808080 1px solid;"
+                                    colspan="2">
+                                    <table id="tblContent" style="width: 100%;" cellpadding="0" cellspacing="0">
+                                        <tr style="width: 100%">
+                                            <td style="vertical-align: top" colspan="4">
+                                                &nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr style="height: 3%; width: 100%">
+                                <td colspan="3" style="text-align: center; border-top: #808080 1px solid; height: 2%;">
+                                    <asp:Label ID="copyriteLabel" runat="server" Text="Copyright 2009 Rifacimento Int.">
+                                    </asp:Label></td>
+                            </tr>
+                            <asp:HiddenField ID="UrlHiddenField" runat="server" />
+                            <asp:HiddenField ID="IsDefectSearchCriteriaSavedHiddenField" runat="server" Value="false" />
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <%-- <iframe id="theframe" style="display: none;" src="javascript:false;" class="frmcls"
+            scrolling="yes"></iframe>
+        <div id="autocomplete" class="resdiv" style="background-color: #ccccff; display: none;">
+        </div>--%>
+    </form>
+</body>
+</html>
